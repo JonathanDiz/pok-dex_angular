@@ -1,0 +1,12 @@
+<div class="pagination">
+  <button (click)="previousPage()">Anterior</button>
+  <span>Página {{ currentPage }} de {{ totalPages }}</span>
+  <button (click)="nextPage()">Siguiente</button>
+</div>
+
+<div class="pokemon-list">
+  <div *ngFor="let pokemon of getVisiblePokemonList()">
+    <img [src]="pokemon.imagen" alt="Imagen de {{pokemon.nombre}}" />
+    <p>{{pokemon.nombre}}</p>
+  </div>
+</div>
