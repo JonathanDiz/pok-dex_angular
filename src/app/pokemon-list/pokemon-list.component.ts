@@ -57,5 +57,6 @@ export class PokemonListComponent implements OnInit {
       // Actualiza la página actual
       this.currentPage = page;
     }
+    console.log(this.pokemonList);
   }
 }

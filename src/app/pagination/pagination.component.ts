@@ -24,7 +24,7 @@ export class PaginationComponent {
       const pokemon = this.pokemonList[i];
       const pokemonInfo = {
         name: pokemon.name,
-        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i + 1}.png`
+        image: pokemon.sprites.front_default
       };
       visiblePokemonList.push(pokemonInfo);
     }
