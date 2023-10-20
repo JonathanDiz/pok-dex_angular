@@ -4,15 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
+import { PokemonListComponent } from './components/pokemon-list/pokemon-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PaginationComponent } from './pagination/pagination.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PokemonListComponent,
-    PaginationComponent
+    PaginationComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

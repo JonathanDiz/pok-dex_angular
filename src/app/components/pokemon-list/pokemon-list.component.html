@@ -1,0 +1,17 @@
+<div class="pokemon-search">
+  <input [(ngModel)]="nombrePokemon" name="nombrePokemon" placeholder="Buscar Pokémon" />
+  <button (click)="buscarPokemon()">Buscar</button>
+</div>
+
+<div class="pokemon-list-container">
+  <div class="pokemon-card" *ngFor="let pokemon of listaPokemon">
+    <img [src]="pokemon.imagen" alt="Imagen de {{pokemon.nombre}}" />
+    <p>{{pokemon.nombre}}</p>
+  </div>
+</div>
+
+<div class="pagination">
+  <button (click)="previousPage()">Anterior</button>
+  <span>Página {{ currentPage }} de {{ totalPages }}</span>
+  <button (click)="nextPage()">Siguiente</button>
+</div>

@@ -1,0 +1,127 @@
+<style>
+  .footer-banner {
+    background: linear-gradient(45deg, #ff0000, #0000ff, #ff0000);
+    background-size: 200% 200%;
+    animation: gradientAnimation 3s linear infinite;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /* Estilos generales del footer */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Estilos para la sección de contacto */
+.contact {
+  flex: 1;
+  text-align: left;
+}
+
+.contact h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.contact a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.contact p {
+  font-size: 0.9rem;
+}
+
+/* Estilos para la sección de redes sociales */
+.social {
+  flex: 1;
+  text-align: right;
+}
+
+.social h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.social-icons a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Estilos para las imágenes de redes sociales */
+.social-icons img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.2s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .contact,
+  .social {
+    width: 100%;
+  }
+
+  .social {
+    margin-top: 20px;
+  }
+}
+
+</style>
+
+
+<footer class="footer-banner">
+  <div class="contact">
+    <img src="pokedex-logo.png" alt="Pokédex Logo" class="pokedex-logo" />
+    <h2>Contact</h2>
+    <a href="mailto:jonathanfullstack@gmail.com">jonathanfullstack@gmail.com</a>
+    <p>Tel: <a href="Tel:+56964252470">+569 64252470(WhatsApp)</a></p>
+  </div>
+  <div class="social">
+    <h2>Find me too in:</h2>
+    <div class="social-icons">
+      <a href="https://github.com/ivangutierrez92" target="_blank" rel="noreferrer, noopener">
+        <img src="./assets/images/github-mark.png" alt="github" />
+      </a>
+      <a href="https://www.linkedin.com/in/ivan-gutierrez-castro/" target="_blank" rel="noreferrer, noopener">
+        <img src="./assets/images/linkedin.png" alt="linkedin" />
+      </a>
+    </div>
+  </div>
+</footer>

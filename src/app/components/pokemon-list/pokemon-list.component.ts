@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PokemonService } from '../pokemon.service';
+import { PokemonService } from '../../service/pokemon.service';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -10,9 +10,9 @@ export class PokemonListComponent implements OnInit {
   nombrePokemon: string = '';
   pokemonList: any[] = [];
   listaPokemon: any[] = [];
-  visiblePokemonList: any[] = [];
-  currentPage: number = 1;
-  totalPages: number = 0; // Define la propiedad totalPages y establece su valor
+  currentPage: number = 1; // Página actual
+  itemsPerPage: number = 20; // Cantidad de Pokémon por página
+  totalPages: number = 0; // Total de páginas disponibles
 
   constructor(private pokemonService: PokemonService) { }
 
@@ -36,8 +36,11 @@ export class PokemonListComponent implements OnInit {
   cargarListaPokemon() {
     this.pokemonService.getPokemonList().subscribe((data) => {
       this.pokemonList = data.results;
-      this.totalPages = Math.ceil(data.count / 20); // Calcula el número total de páginas
+      this.totalPages = Math.ceil(data.count / this.itemsPerPage);
     });
+
+    // Carga la primera página de Pokémon inicialmente
+    this.loadPokemonPage(1);
   }
 
   changePage(page: number) {
@@ -46,17 +49,20 @@ export class PokemonListComponent implements OnInit {
   }
 
   loadPokemonPage(page: number) {
-    const itemsPerPage = 20;
-    const startIndex = (page - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-
-    // Verifica que el rango no supere la longitud de la lista completa
-    if (startIndex < this.pokemonList.length) {
-      // Actualiza la lista de Pokémones visibles con el rango actual
-      this.visiblePokemonList = this.pokemonList.slice(startIndex, endIndex);
-      // Actualiza la página actual
-      this.currentPage = page;
+    // Implementa la lógica para cargar Pokémon de la página indicada
+  }
+  
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadPokemonPage(this.currentPage);
     }
-    console.log(this.pokemonList);
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.loadPokemonPage(this.currentPage);
+    }
   }
 }
