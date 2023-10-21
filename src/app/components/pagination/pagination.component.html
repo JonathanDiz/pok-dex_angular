@@ -1,10 +1,50 @@
+<style>
+  .pagination-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 -10px; /* Agrega un margen negativo para ajustar el espaciado entre las tarjetas */
+  }
+
+  .pagination-card {
+    width: calc(20% - 20px); /* Cada tarjeta ocupa el 20% del ancho con margen de 10px en cada lado */
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+  }
+
+  .pagination-card:hover {
+    transform: scale(1.05);
+  }
+
+  .pagination-card img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .pagination-card h3 {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+</style>
+
 <div class="pagination">
   <button (click)="previousPage()">Anterior</button>
   <span>Página {{ currentPage }} de {{ totalPages }}</span>
   <button (click)="nextPage()">Siguiente</button>
 </div>
 
-<div *ngFor="let pokemon of visiblePokemonList">
-  <img [src]="pokemon.image" alt="{{pokemon.name}}" />
-  <p>{{pokemon.name}}</p>
+<div class="pagination-cards">
+  <div class="pagination-card" *ngFor="let pokemon of visiblePokemonList">
+    <img [src]="pokemon.image" alt="{{pokemon.name}}" />
+    <p>{{pokemon.name}}</p>
+  </div>
 </div>
