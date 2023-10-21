@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pokedex_angular';
+  currentPage: number = 1;
+  totalPages: number = 1;
+  pokemonList: any[] = [];
+  pageChange = new EventEmitter<number>();
 }

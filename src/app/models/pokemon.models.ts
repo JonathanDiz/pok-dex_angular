@@ -14,3 +14,18 @@ export interface PokemonDetailsResponse {
     front_default: string;
   };
 }
+
+export interface Pokemon {
+  name: string;
+  id: number;
+  types: PokemonType[];
+  sprites: PokemonSprites;
+}
+
+export interface PokemonType {
+  name: string;
+}
+
+export interface PokemonSprites {
+  front_default: string;
+}

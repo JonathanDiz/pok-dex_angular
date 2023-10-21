@@ -4,6 +4,7 @@
   <button (click)="nextPage()">Siguiente</button>
 </div>
 
-<div>
-  <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" (pageChange)="pageChange.emit($event)"></app-pagination>
+<div *ngFor="let pokemon of visiblePokemonList">
+  <img [src]="pokemon.image" alt="{{pokemon.name}}" />
+  <p>{{pokemon.name}}</p>
 </div>

@@ -1,36 +1,58 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.sass']
 })
-export class PaginationComponent {
+export class PaginationComponent implements OnInit {
+  @Input() pokemonList: any[] = [];
   @Input() currentPage: number = 1;
   @Input() totalPages: number = 1;
-  @Input() pokemonList: any[] = [];
+  @Input() itemsPerPage: number = 20;
   @Output() pageChange = new EventEmitter<number>();
+  visiblePokemonList: any[] = [];
 
-  getVisiblePokemonList(): any[] {
-    // Calcula el indice de inico y fin de la pagina actual
-    const itemsPerPage = 20;
-    const startIndex = (this.currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const visiblePokemonList: any[] = [];
-    
+  constructor(private httpClient: HttpClient) { }
 
-    // Recorre la lista de Pokémones visibles y crea un objeto con imagen y nombre
-    for (let i = startIndex; i < endIndex && i < this.pokemonList.length; i++) {
-      const pokemon = this.pokemonList[i];
-      const pokemonInfo = {
-        name: pokemon.name,
-        image: pokemon.sprites.front_default
-      };
-      visiblePokemonList.push(pokemonInfo);
-    }
+  ngOnInit() {
+    // Inicialmente, carga los Pokémon de la primera página
+    this.loadVisiblePokemonList(this.currentPage);
+  }
 
-    // Filtrar los Pokémon en la página actual
-    return this.pokemonList.slice(startIndex, endIndex);
+  loadVisiblePokemonList(page: number): void {
+    const itemsPerPage = this.itemsPerPage;
+    const offset = (page - 1) * itemsPerPage;
+
+    // Construye la URL para obtener los Pokémon de la página actual
+    const apiUrl = `https://pokeapi.co/api/v2/pokemon?limit=${itemsPerPage}&offset=${offset}`;
+
+    // Realiza una solicitud HTTP para obtener los Pokémon
+    this.httpClient.get(apiUrl).subscribe((data: any) => {
+      const results = data.results;
+      const visiblePokemonList: any[] = [];
+
+      // Itera sobre los resultados y obtén la información de cada Pokémon
+      results.forEach((result: any) => {
+        const pokemonName = result.name;
+        const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.getPokemonId(result.url)}.png`;
+
+        // Agrega la información del Pokémon a la lista
+        visiblePokemonList.push({
+          name: pokemonName,
+          image: imageUrl
+        });
+      });
+
+      // Asigna los Pokémon visibles a la propiedad visiblePokemonList
+      this.visiblePokemonList = visiblePokemonList;
+    });
+  }
+
+  private getPokemonId(url: string): number {
+    const parts = url.split('/');
+    return parseInt(parts[parts.length - 2], 10);
   }
 
   previousPage() {
