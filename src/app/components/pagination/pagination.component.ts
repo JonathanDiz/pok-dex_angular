@@ -10,7 +10,7 @@ export class PaginationComponent implements OnInit {
   @Input() pokemonList: any[] = [];
   @Input() currentPage: number = 1;
   @Input() totalPages: number = 1;
-  @Input() itemsPerPage: number = 20;
+  @Input() itemsPerPage: number = 2000;
   @Output() pageChange = new EventEmitter<number>();
   visiblePokemonList: any[] = [];
 
