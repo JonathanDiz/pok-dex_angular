@@ -42,6 +42,10 @@
   <button (click)="nextPage()">Siguiente</button>
 </div>
 
+<div class="alphabet-buttons">
+  <button (click)="applyFilterByLetter(letter)" *ngFor="let letter of alphabet">{{ letter }}</button>
+</div>
+
 <div class="pagination-cards">
   <div class="pagination-card" *ngFor="let pokemon of visiblePokemonList">
     <img [src]="pokemon.image" alt="{{pokemon.name}}" />
